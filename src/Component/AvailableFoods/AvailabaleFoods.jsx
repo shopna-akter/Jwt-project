@@ -1,10 +1,94 @@
+import { useState } from "react";
+import { Link, useLoaderData } from "react-router-dom";
 
 const AvailabaleFoods = () => {
-    
+    const allFoods = useLoaderData()
+    const [layOut, setLayOut] = useState('lg:grid-cols-3')
+    const handleChangeLayout = () => {
+        if (layOut === 'lg:grid-cols-3') {
+            setLayOut('lg:grid-cols-2')
+        }
+        else {
+            setLayOut('lg:grid-cols-3')
+        }
+    }
     return (
-        <div>
-            
-        </div>
+        <>
+            <div>
+                <div className="text-center">
+                    <h1 className="text-xl font-bold">Available Food</h1>
+                    <p>Explore our selection of delicious and fresh foods available for you to enjoy!</p>
+                </div>
+                <div className="flex gap-8 my-6 justify-center">
+                    <button onClick={handleChangeLayout} className="btn bg-green-400">Change Layout</button>
+                    <div className="join">
+                        <div>
+                            <div>
+                                <input className="input input-bordered join-item" placeholder="Search" />
+                            </div>
+                        </div>
+                        <div className="indicator">
+                            <button className="btn join-item">Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div className={`grid grid-cols-1 md:grid-cols-2 ${layOut}`}>
+                    {
+                        allFoods.map((food) => (
+                            <div className="mx-4" key={food._id}>
+                                <div>
+                                    <div className="mb-4">
+                                        <div className="card border bg-base-100 shadow-xl">
+                                            <figure>
+                                                <img src={food.Image} className='h-60' alt={food.Food_name} />
+                                            </figure>
+                                            <div className="card-body text-left">
+                                                <div className="text-center mr-2">
+                                                    <h2 className="font-bold text-xl">{food.Food_name}</h2>
+                                                </div>
+                                                <p>{food.Additional_Notes}</p>
+                                                <div className="card-actions justify-between">
+                                                    <div className="flex gap-2">
+                                                        <span>Cost:</span>
+                                                        <span>{food.Quantity}</span>
+                                                    </div>
+                                                    <div className="flex gap-2">
+                                                        <h1>Country:</h1>
+                                                        <span>{food.Expired_Date}</span>
+                                                    </div>
+                                                </div>
+                                                <div className="card-actions justify-between">
+                                                    {/* <div className="flex items-center gap-2">
+                                        <span><FaLocationDot /></span>
+                                        <span>{food.location}</span>
+                                    </div> */}
+                                                    <div className="flex gap-2">
+                                                        <span>Seasonality:</span>
+                                                        <span>{food.Food_Status}</span>
+                                                    </div>
+                                                </div>
+                                                <div className="card-actions justify-between">
+                                                    <div className="flex items-center gap-2">
+                                                        <span>Travel time:</span>
+                                                        {/* <span>{food.User_Email}</span> */}
+                                                    </div>
+                                                    <div className="flex gap-2">
+                                                        <span>Visitors(year):</span>
+                                                        <span>{food.Pickup_Location}</span>
+                                                    </div>
+                                                </div>
+                                                <Link className="btn btn-info" to={`/${food._id}`}>View Details</Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </>
+
     );
 };
 
