@@ -1,11 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddFood = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
+    console.log(user);
     const handleAddFood = e => {
         e.preventDefault()
-        const form  = e.target
+        const form = e.target
         const User_Name = form.User_Name.value
         const User_Email = form.User_Email.value
         const Food_name = form.Food_name.value
@@ -16,8 +19,23 @@ const AddFood = () => {
         const Image = form.Image.value
         const Donator_Image = form.Donator_Image.value
         const Additional_Notes = form.Additional_Notes.value
-        const newFood = {User_Email , Food_name , User_Name , Pickup_Location , Food_Status , Image , Donator_Image , Additional_Notes , Quantity , Expired_Date}
+        const newFood = { User_Email, Food_name, User_Name, Pickup_Location, Food_Status, Image, Donator_Image, Additional_Notes, Quantity, Expired_Date }
         console.log(newFood);
+        axios.post('http://localhost:5000/foods', newFood, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => {
+                console.log(res.data);
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        title: "Good job!",
+                        text: "Tour added successfuly!",
+                        icon: "success"
+                      })
+                }
+            })
     }
     return (
         <div className="flex flex-col items-center justify-center py-6 bg-gray-100">
@@ -31,11 +49,11 @@ const AddFood = () => {
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Donator Name
                             </label>
-                            <input required type="text" placeholder="Enter User Name" name="User_Name" className="input input-bordered w-full" />
+                            <input required type="text" defaultValue={user.displayName} placeholder="Enter User Name" name="User_Name" className="input input-bordered w-full" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Donator Email</label>
-                            <input defaultValue={user.email} required type="text" placeholder="Enter User Email" name="User_Email" className="input input-bordered w-full" />
+                            <input defaultValue={user.email} required type="email" placeholder="Enter User Email" name="User_Email" className="input input-bordered w-full" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Name</label>
@@ -49,26 +67,27 @@ const AddFood = () => {
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Expired Date
                             </label>
-                            <input required type="text" placeholder="Enter Food Expired Date" name="Expired_Date" className="input input-bordered w-full" />
+                            <input required type="date" placeholder="Enter Food Expired Date" name="Expired_Date" className="input input-bordered w-full" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Quantity
                             </label>
-                            <input required type="text" placeholder="Enter Food Quantity" name="Quantity" className="input input-bordered w-full" />
+                            <input required type="number" placeholder="Enter Food Quantity" name="Quantity" className="input input-bordered w-full" />
                         </div>
 
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Food Status</label>
-                            <input required type="text" placeholder="Enter Food Status" name="Status" className="input input-bordered w-full" />
+                            <input defaultValue="available" required type="text" placeholder="Enter Food Status" name="Food_Status" className="input input-bordered w-full" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Donator Image</label>
-                            <input required type="text" placeholder="Enter Food Donator Image" name="Donator_Image" className="input input-bordered w-full" />
+                            <input  type="url" placeholder="Enter Food Donator Image" name="Donator_Image" className="input input-bordered w-full" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Image</label>
-                            <input required type="text" placeholder="Enter Food Image" name="Image" className="input input-bordered w-full" />
+                            <input required type="url" placeholder="Enter Food Image" name="Image" className="input input-bordered w-full" />
                         </div>
+                        <br />
                         <div>
                             <div className="mb-2">
                                 <label className="block text-sm font-medium text-gray-700">Additional Notes</label>

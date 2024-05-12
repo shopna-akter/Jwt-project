@@ -27,8 +27,10 @@ const Navbar = () => {
         }
     }, [user]);
     const links = <>
-        <NavLink to='/' className='btn btn-active mr-2'>Home</NavLink>
-        <NavLink to='/AddFoods' className='btn btn-active mr-2'>Add Foods</NavLink>
+        <NavLink to='/' className='btn mr-2'>Home</NavLink>
+        <NavLink to='/AddFood' className='btn mr-2'>Add Foods</NavLink>
+        <NavLink to='ManageMyFood' className='btn mr-2'>Manage My Food</NavLink>
+        <NavLink to='/AvailableFoods' className='btn mr-2'>Available Foods</NavLink>
     </>
     const handleSignOut = () => {
         Swal.fire({
