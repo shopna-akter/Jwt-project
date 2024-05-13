@@ -46,22 +46,22 @@ const router = createBrowserRouter([
       {
         path: '/ManageMyFood',
         element: <PrivateRoute><ManageMyFood></ManageMyFood></PrivateRoute>,
-        loader: () => fetch('http://localhost:5000/foods')
+        loader: () => fetch('http://localhost:5000/allFoods')
       },
       {
         path: '/AvailableFoods',
         element: <AvailabaleFoods></AvailabaleFoods>,
-        loader: () => fetch('http://localhost:5000/foods')
+        loader: () => fetch('http://localhost:5000/allFoods')
       },
       {
         path: '/updateFood/:id',
         element: <UpdateFood></UpdateFood>,
-        loader: ({params}) => fetch(`http://localhost:5000/foods/${params.id}`)
+        loader: ({params}) => fetch(`http://localhost:5000/allFoods/${params.id}`)
       },
       {
         path: '/Foods/:id',
         element: <PrivateRoute><FoodDetails></FoodDetails></PrivateRoute>,
-        loader: () => fetch('http://localhost:5000/foods')
+        loader: () => fetch('http://localhost:5000/allFoods')
       }
     ]
   },

@@ -21,7 +21,7 @@ const AddFood = () => {
         const Additional_Notes = form.Additional_Notes.value
         const newFood = { User_Email, Food_name, User_Name, Pickup_Location, Food_Status, Image, Donator_Image, Additional_Notes, Quantity, Expired_Date }
         console.log(newFood);
-        axios.post('http://localhost:5000/foods', newFood, {
+        axios.post('http://localhost:5000/allFoods', newFood, {
             headers: {
                 'Content-Type': 'application/json'
             }

@@ -21,7 +21,7 @@ const ManageMyFood = () => {
             confirmButtonText: 'Yes, do it!'
         }).then(result => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/foods/${_id}`, {
+                fetch(`http://localhost:5000/allFoods/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

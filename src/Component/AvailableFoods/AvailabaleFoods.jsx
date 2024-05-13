@@ -18,7 +18,7 @@ const AvailableFoods = () => {
         setSearchValue(searchField)
     }
     const handleSearchValue = () => {
-        fetch(`http://localhost:5000/foods/${searchValue}`)
+        fetch(`http://localhost:5000/allFoods/${searchValue}`)
         .then(res => res.json())
         .then(data => {
             setFoods(data)
