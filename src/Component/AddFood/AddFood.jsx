@@ -81,7 +81,7 @@ const AddFood = () => {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Donator Image</label>
-                            <input  type="url" placeholder="Enter Food Donator Image" name="Donator_Image" className="input input-bordered w-full" />
+                            <input  type="url" defaultValue={user.photoURL} placeholder="Enter Food Donator Image" name="Donator_Image" className="input input-bordered w-full" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Image</label>

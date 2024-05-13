@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AvailableFoods = () => {
     const [searchValue, setSearchValue] = useState()
@@ -19,7 +20,17 @@ const AvailableFoods = () => {
     const handleSearchValue = () => {
         fetch(`http://localhost:5000/foods/${searchValue}`)
         .then(res => res.json())
-        .then(data => setFoods(data))
+        .then(data => {
+            setFoods(data)
+        })
+        .catch(error => {
+            Swal.fire({
+                title: "Mistake!",
+                text: "You may type the name incorrect please type exect to get the data",
+                icon: "error"
+              })
+              console.error(error);
+        })
     }
     const handleInputChange = e => {
         setSearchValue(e.target.value);

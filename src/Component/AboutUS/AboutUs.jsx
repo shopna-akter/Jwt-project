@@ -20,7 +20,7 @@ const AboutUs = () => {
                         </div>
                         <div className="w-full md:w-1/2 lg:pl-8">
                             <div className="relative overflow-hidden rounded-lg shadow-lg">
-                                <img src="about-image.jpg" alt="About Us" className="object-cover w-full h-full" />
+                                <img src="https://i.ibb.co/gvYMj1F/upic-team-cta.jpg" alt="About Us" className="object-cover w-full h-full" />
                                 <div className="absolute inset-0 bg-black opacity-50"></div>
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <Link to='/' className="bg-white text-gray-800 font-semibold py-2 px-4 rounded-full border border-gray-800 hover:bg-gray-800 hover:text-white transition duration-300">Watch Our Story</Link>

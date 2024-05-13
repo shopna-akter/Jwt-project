@@ -1,14 +1,16 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from "../../firebase/firebase.init";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { Helmet } from "react-helmet";
+import axios from "axios";
 
 const Login = () => {
-    const {SignIn} = useContext(AuthContext)
+    const navigate = useNavigate()
+    const { SignIn } = useContext(AuthContext)
     const googleProvider = new GoogleAuthProvider()
     const githubProvider = new GithubAuthProvider()
     const auth = getAuth(app)
@@ -17,37 +19,46 @@ const Login = () => {
         const form = e.target
         const email = form.email.value
         const password = form.password.value
-        SignIn(email , password)
-        .then(result => {
-            console.log(result);
-            toast.success('Login successful')
-        })
-        .catch(error => {
-            console.log(error);
-            toast.error('Login failed')
-        })
+        SignIn(email, password)
+            .then(result => {
+                console.log(result);
+                toast.success('Login successful')
+                const loggedInUser = { email }
+                axios.post('http://localhost:5000/jwt', loggedInUser, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.success) {
+                            navigate(location?.state ? location.state : '/')
+                        }
+                    })
+                    .catch(error => console.log(error));
+            })
+            .catch(error => {
+                console.log(error);
+                toast.error('Login failed')
+            })
     }
     const handleSignInWithGoogle = () => {
-        signInWithPopup(auth , googleProvider)
-        .then(result => {
-            console.log(result);
-            toast.success('Login Successful with Google')
-        })
-        .catch(error =>{
-            console.log(error);
-            toast.error('Login failed with Google')
-        })
+        signInWithPopup(auth, googleProvider)
+            .then(result => {
+                console.log(result);
+                toast.success('Login Successful with Google')
+            })
+            .catch(error => {
+                console.log(error);
+                toast.error('Login failed with Google')
+            })
     }
     const handleSignInWithGithub = () => {
-        signInWithPopup(auth , githubProvider)
-        .then(result => {
-            console.log(result);
-            toast.success('Login Successful with Github')
-        })
-        .catch(error =>{
-            console.log(error);
-            toast.error('Login failed with Github')
-        })
+        signInWithPopup(auth, githubProvider)
+            .then(result => {
+                console.log(result);
+                toast.success('Login Successful with Github')
+            })
+            .catch(error => {
+                console.log(error);
+                toast.error('Login failed with Github')
+            })
     }
     return (
         <div>

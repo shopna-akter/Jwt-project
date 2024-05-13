@@ -1,56 +1,96 @@
-/* eslint-disable react/prop-types */
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const FeaturedFood = ({food}) => {
-    const {  Food_name, User_Name, Pickup_Location, Food_Status, Image, Donator_Image, Additional_Notes, Quantity, Expired_Date , _id } = food
-    // console.log(food);
+const FeaturedFood = () => {
+    const [foods, setFoods] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://localhost:5000/foods");
+                if (!response.ok) {
+                    throw new Error("Failed to fetch data");
+                }
+                const data = await response.json();
+                setFoods(data);
+                setIsLoading(false);
+            } catch (error) {
+                setError(error);
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    if (isLoading) {
+        return <span className="loading-spinner"></span>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
+    if (foods.length === 0) {
+        return <div>No data available.</div>;
+    }
+
     return (
-        <div className="mx-4">
-            <div>
-                <div className="mb-4">
-                    <div className="card border bg-base-100 shadow-xl">
-                        <figure>
-                            <img src={Image} className='h-60' alt={Food_name} />
-                        </figure>
-                        <div className="card-body text-left">
-                            <div className="text-center mr-2">
-                                <h2 className="font-bold text-xl">{Food_name}</h2>
+        <div>
+            <div className="text-center mb-6">
+                <h2 className="text-4xl font-bold mb-2">Featured Foods</h2>
+                <p className="text-lg">The Featured Food section showcases a curated selection of food items that are highlighted or promoted for various reasons, <br className="md:block hidden" /> such as popularity, freshness, or special offers. This section typically appears on a website or application,<br /> often on the homepage or a dedicated page, to attract attention and promote specific food products.</p>
+            </div>
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3 mx-4">
+                {foods.map((food) => (
+                    <div key={food._id} className="mb-4">
+                        <div className="card border bg-base-100 shadow-xl">
+                            <figure>
+                                <img src={food.Image} className='h-60' alt={food.Food_name} />
+                            </figure>
+                            <div className="card-body text-left">
+                                <div className="text-center mr-2">
+                                    <h2 className="font-bold text-xl">{food.Food_name}</h2>
+                                </div>
+                                <p>{food.Additional_Notes}</p>
+                                <div className="card-actions justify-between">
+                                    <div className="flex gap-2">
+                                        <span>Quantity:</span>
+                                        <span>{food.Quantity}</span>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <h1>Expired_Date:</h1>
+                                        <span>{food.Expired_Date}</span>
+                                    </div>
+                                </div>
+                                <div className="card-actions justify-between">
+                                    <div className="flex gap-2">
+                                        <span>Donator Image:</span>
+                                        <img className="rounded-full h-12 w-12 pb-2" src={food.Donator_Image} alt="" />
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <span>Donator Name:</span>
+                                        <span>{food.User_Name}</span>
+                                    </div>
+                                </div>
+                                <div className="card-actions justify-between">
+                                    <div className="flex gap-2">
+                                        <span>Food_Status:</span>
+                                        <span>{food.Food_Status}</span>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <span>Pickup Location:</span>
+                                        <span>{food.Pickup_Location}</span>
+                                    </div>
+                                </div>
+                                <Link className="btn btn-info" to={`Foods/${food._id}`}>View Details</Link>
                             </div>
-                            <p>{Additional_Notes}</p>
-                            <div className="card-actions justify-between">
-                                <div className="flex gap-2">
-                                    <span>Cost:</span>
-                                    <span>{Quantity}</span>
-                                </div>
-                                <div className="flex gap-2">
-                                    <h1>Country:</h1>
-                                    <span>{Expired_Date}</span>
-                                </div>
-                            </div>
-                            <div className="card-actions justify-between">
-                                {/* <div className="flex items-center gap-2">
-                                    <span><FaLocationDot /></span>
-                                    <span>{location}</span>
-                                </div> */}
-                                <div className="flex gap-2">
-                                    <span>Seasonality:</span>
-                                    <span>{Food_Status}</span>
-                                </div>
-                            </div>
-                            <div className="card-actions justify-between">
-                                <div className="flex items-center gap-2">
-                                    <span>Travel time:</span>
-                                    {/* <span>{User_Email}</span> */}
-                                </div>
-                                <div className="flex gap-2">
-                                    <span>Visitors(year):</span>
-                                    <span>{Pickup_Location}</span>
-                                </div>
-                            </div>
-                            <Link className="btn btn-info" to={`Foods/${_id}`}>View Details</Link>
                         </div>
                     </div>
-                </div>
+                ))}
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { useLoaderData, useParams } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 
 const FoodDetails = () => {
     const foods = useLoaderData();
@@ -44,7 +44,7 @@ const FoodDetails = () => {
                     </div>
                 </div>
                 <div className="mt-8">
-                    <button className="btn btn-outline w-full">Request</button>
+                    <Link to={`/checkRequest/${food._id}`} className="btn btn-outline w-full">Request</Link>
                 </div>
             </div>
         </div>
