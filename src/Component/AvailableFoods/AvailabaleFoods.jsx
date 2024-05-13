@@ -2,12 +2,27 @@ import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 
 const AvailableFoods = () => {
+    const [searchValue, setSearchValue] = useState()
     const allFoods = useLoaderData()
-
     const [foods, setFoods] = useState(allFoods);
     const [layOut, setLayOut] = useState('lg:grid-cols-3');
     const handleChangeLayout = () => {
         setLayOut(prevLayout => (prevLayout === 'lg:grid-cols-3' ? 'lg:grid-cols-2' : 'lg:grid-cols-3'));
+    };
+    const handleSearch = e => {
+        e.preventDefault()
+        const form = e.target
+        const searchField = form.searchField.value
+        console.log(searchField);
+        setSearchValue(searchField)
+    }
+    const handleSearchValue = () => {
+        fetch(`http://localhost:5000/foods/${searchValue}`)
+        .then(res => res.json())
+        .then(data => setFoods(data))
+    }
+    const handleInputChange = e => {
+        setSearchValue(e.target.value);
     };
     return (
         <>
@@ -19,16 +34,11 @@ const AvailableFoods = () => {
                 <div className="flex gap-8 my-6 justify-center">
                     <button onClick={handleChangeLayout} className="btn bg-green-400">Change Layout</button>
                     <div className="join">
-                        <div>
-                            <div>
-                                <input
-                                    className="input input-bordered join-item"
-                                    placeholder="Search"
-                                />
-                            </div>
-                        </div>
+                        <form onSubmit={handleSearch}>
+                            <input name="searchField" onChange={handleInputChange} className="input input-bordered join-item" placeholder="Search" />
+                        </form>
                         <div className="indicator">
-                            <button className="btn join-item">Search</button>
+                            <button onClick={handleSearchValue} className="btn join-item">Search</button>
                         </div>
                     </div>
                 </div>
@@ -70,7 +80,7 @@ const AvailableFoods = () => {
                                                 <span>{food.Pickup_Location}</span>
                                             </div>
                                         </div>
-                                        <Link className="btn btn-info" to={`/${food._id}`}>View Details</Link>
+                                        <Link className="btn btn-info" to={`Foods/${food._id}`}>View Details</Link>
                                     </div>
                                 </div>
                             </div>

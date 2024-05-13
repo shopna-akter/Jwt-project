@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const FeaturedFood = ({food}) => {
     const {  Food_name, User_Name, Pickup_Location, Food_Status, Image, Donator_Image, Additional_Notes, Quantity, Expired_Date , _id } = food
-    console.log(food);
+    // console.log(food);
     return (
         <div className="mx-4">
             <div>
@@ -47,7 +47,7 @@ const FeaturedFood = ({food}) => {
                                     <span>{Pickup_Location}</span>
                                 </div>
                             </div>
-                            <Link className="btn btn-info" to={`/${_id}`}>View Details</Link>
+                            <Link className="btn btn-info" to={`Foods/${_id}`}>View Details</Link>
                         </div>
                     </div>
                 </div>

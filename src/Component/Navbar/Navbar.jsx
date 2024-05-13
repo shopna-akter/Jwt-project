@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom"
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import './Link.css'
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
     const [userPhoto, setUserPhoto] = useState('https://i.ibb.co/yWR8BCV/user.png');
@@ -27,10 +28,10 @@ const Navbar = () => {
         }
     }, [user]);
     const links = <>
-        <NavLink to='/' className='btn mr-2'>Home</NavLink>
-        <NavLink to='/AddFood' className='btn mr-2'>Add Foods</NavLink>
-        <NavLink to='ManageMyFood' className='btn mr-2'>Manage My Food</NavLink>
-        <NavLink to='/AvailableFoods' className='btn mr-2'>Available Foods</NavLink>
+        <NavLink activeClassname='active' to='/' className='btn mr-2'>Home</NavLink>
+        <NavLink activeClassname='active' to='/AddFood' className='btn mr-2'>Add Foods</NavLink>
+        <NavLink activeClassname='active' to='ManageMyFood' className='btn mr-2'>Manage My Food</NavLink>
+        <NavLink activeClassname='active' to='/AvailableFoods' className='btn mr-2'>Available Foods</NavLink>
     </>
     const handleSignOut = () => {
         Swal.fire({
