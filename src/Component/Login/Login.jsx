@@ -6,7 +6,7 @@ import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from
 import app from "../../firebase/firebase.init";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { Helmet } from "react-helmet";
-import axios from "axios";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const navigate = useNavigate()
@@ -22,31 +22,39 @@ const Login = () => {
         SignIn(email, password)
             .then(result => {
                 console.log(result);
-                toast.success('Login successful')
-                const loggedInUser = { email }
-                axios.post('http://localhost:5000/jwt', loggedInUser, { withCredentials: true })
-                    .then(res => {
-                        console.log(res.data);
-                        if (res.data.success) {
-                            navigate(location?.state ? location.state : '/')
-                        }
-                    })
-                    .catch(error => console.log(error));
+                Swal.fire({
+                    title: "Success!",
+                    text: "Login successful",
+                    icon: "success"
+                })
+                navigate(location?.state ? location.state : '/')
             })
             .catch(error => {
                 console.log(error);
-                toast.error('Login failed')
+                Swal.fire({
+                    title: "Failed!",
+                    text: "Login Failed",
+                    icon: "error"
+                })
             })
     }
     const handleSignInWithGoogle = () => {
         signInWithPopup(auth, googleProvider)
             .then(result => {
                 console.log(result);
-                toast.success('Login Successful with Google')
+                Swal.fire({
+                    title: "Success!",
+                    text: "Login successful with Google",
+                    icon: "success"
+                })
             })
             .catch(error => {
                 console.log(error);
-                toast.error('Login failed with Google')
+                Swal.fire({
+                    title: "Failed!",
+                    text: "Login Failed with Google",
+                    icon: "error"
+                })
             })
     }
     const handleSignInWithGithub = () => {

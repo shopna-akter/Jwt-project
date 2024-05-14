@@ -109,7 +109,7 @@ const AvailableFoods = () => {
                                                 <span>{food.Pickup_Location}</span>
                                             </div>
                                         </div>
-                                        <Link className="btn btn-info" to={`Foods/${food._id}`}>View Details</Link>
+                                        <Link className="btn btn-info" to={`/Foods/${food._id}`}>View Details</Link>
                                     </div>
                                 </div>
                             </div>
