@@ -5,7 +5,7 @@ const Footer = () => {
         <div>
             <footer className="footer md:justify-evenly flex md:p-10 bg-neutral text-neutral-content">
                 <div className="text-center">
-                    <h2 className="text-xl font-bold">TourSpot</h2>
+                    <h2 className="text-xl font-bold">Be a Hand</h2>
                     <div className="flex gap-4">
                         <FaFacebook className="h-6 w-6"></FaFacebook>
                         <FaTwitter className="h-6 w-6"></FaTwitter>

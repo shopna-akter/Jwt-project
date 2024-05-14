@@ -15,7 +15,7 @@ const UpdateFood = () => {
         const Additional_Notes = form.Additional_Notes.value
         const updatedFood = {Food_name,Pickup_Location, Food_Status, Additional_Notes, Quantity, Expired_Date }
         console.log(updatedFood);
-        fetch(`http://localhost:5000/allFoods/${_id}` , {
+        fetch(`http://localhost:5000/foods/${_id}` , {
             method:'PUT',
             headers: {
                 'content-type': 'application/json'

@@ -32,6 +32,7 @@ const Navbar = () => {
         <NavLink activeClassname='active' to='/AddFood' className='btn mr-2'>Add Foods</NavLink>
         <NavLink activeClassname='active' to='ManageMyFood' className='btn mr-2'>Manage My Food</NavLink>
         <NavLink activeClassname='active' to='/AvailableFoods' className='btn mr-2'>Available Foods</NavLink>
+        <NavLink activeClassname='active' to='/MyFoodRequest' className='btn mr-2'>My Food Request</NavLink>
     </>
     const handleSignOut = () => {
         Swal.fire({
@@ -62,7 +63,7 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
+                    <img className="h-12 w-50" src="https://i.ibb.co/hLS0Hsq/header-logo.png" alt="" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

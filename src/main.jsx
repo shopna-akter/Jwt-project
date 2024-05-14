@@ -21,6 +21,7 @@ import ManageMyFood from './Component/ManageFood/ManageFood';
 import AvailabaleFoods from './Component/AvailableFoods/AvailabaleFoods';
 import UpdateFood from './Component/UpdateFood/UpdateFood';
 import FoodDetails from './Component/FoodDetails/FoodDetails';
+import MyFoodRequest from './Component/MyFoodRequest/MyFoodRequest';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -46,22 +47,26 @@ const router = createBrowserRouter([
       {
         path: '/ManageMyFood',
         element: <PrivateRoute><ManageMyFood></ManageMyFood></PrivateRoute>,
-        loader: () => fetch('http://localhost:5000/allFoods')
+        loader: () => fetch('http://localhost:5000/foods')
       },
       {
         path: '/AvailableFoods',
         element: <AvailabaleFoods></AvailabaleFoods>,
-        loader: () => fetch('http://localhost:5000/allFoods')
+        loader: () => fetch('http://localhost:5000/foods')
       },
       {
         path: '/updateFood/:id',
         element: <UpdateFood></UpdateFood>,
-        loader: ({params}) => fetch(`http://localhost:5000/allFoods/${params.id}`)
+        loader: ({params}) => fetch(`http://localhost:5000/foods/${params.id}`)
       },
       {
         path: '/Foods/:id',
         element: <PrivateRoute><FoodDetails></FoodDetails></PrivateRoute>,
-        loader: () => fetch('http://localhost:5000/allFoods')
+        loader: () => fetch('http://localhost:5000/foods')
+      },
+      {
+        path: '/MyFoodRequest',
+        element: <PrivateRoute><MyFoodRequest></MyFoodRequest></PrivateRoute>
       }
     ]
   },

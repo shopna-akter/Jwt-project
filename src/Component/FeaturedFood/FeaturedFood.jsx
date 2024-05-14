@@ -1,43 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const FeaturedFood = () => {
-    const [foods, setFoods] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch("http://localhost:5000/foods");
-                if (!response.ok) {
-                    throw new Error("Failed to fetch data");
-                }
-                const data = await response.json();
-                setFoods(data);
-                setIsLoading(false);
-            } catch (error) {
-                setError(error);
-                setIsLoading(false);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    if (isLoading) {
-        return <span className="loading-spinner"></span>;
+    const { isPending,isError, error,data: foods} = useQuery({
+        queryKey: ['bestFoods'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/featuredFoods');
+            return res.json()
+        }
+    })
+    if(isPending){
+        return <span className="loading loading-spinner"></span>
     }
-
-    if (error) {
-        return <div>Error: {error.message}</div>;
+    if(isError){
+        return <h2>{error.message}</h2>
     }
-
-    if (foods.length === 0) {
-        return <div>No data available.</div>;
-    }
-
     return (
         <div>
             <div className="text-center mb-6">
@@ -45,7 +22,7 @@ const FeaturedFood = () => {
                 <p className="text-lg">The Featured Food section showcases a curated selection of food items that are highlighted or promoted for various reasons, <br className="md:block hidden" /> such as popularity, freshness, or special offers. This section typically appears on a website or application,<br /> often on the homepage or a dedicated page, to attract attention and promote specific food products.</p>
             </div>
             <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3 mx-4">
-                {foods.map((food) => (
+                {foods?.map((food) => (
                     <div key={food._id} className="mb-4">
                         <div className="card border bg-base-100 shadow-xl">
                             <figure>
