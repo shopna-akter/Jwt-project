@@ -35,12 +35,26 @@ const FoodDetails = () => {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.insertedId){
-                    Swal.fire({
-                        title: "Success!",
-                        text: "Request Succesful",
-                        icon: "success"
+                if (data) {
+                    const updateData = { status: 'Pending' };
+                    fetch(`http://localhost:5000/foods/${food._id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(updateData) 
                     })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data);
+                            if (data.insertedId) {
+                                Swal.fire({
+                                    title: "Success!",
+                                    text: "Request Succesful",
+                                    icon: "success"
+                                })
+                            }
+                        })
                 }
             })
     }
