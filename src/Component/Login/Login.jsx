@@ -74,7 +74,7 @@ const Login = () => {
             <div className="hero min-h-screen ">
                 <ToastContainer></ToastContainer>
                 <Helmet>
-                    <title>| Register</title>
+                    <title>Be a Helping Hand | Login</title>
                 </Helmet>
                 <div className="hero-content flex-col lg:flex-row">
                     <Lottie
@@ -83,7 +83,7 @@ const Login = () => {
                     />
                     {/* <img src="https://i.ibb.co/5TmJhGm/Banner-31a.jpg" className="md:h-[400px] h-[450px] w-[450px] md:w-[600px]" alt="" /> */}
                     <div className="card shrink-0 text-center w-full max-w-sm shadow-2xl bg-base-100">
-                        <h2 className="text-4xl font-bold mt-2">Login now to Tourspot!!</h2>
+                        <h2 className="text-4xl font-bold mt-2">Login now to Be a Helping Hand!!</h2>
                         <form onSubmit={handleLogin} className="card-body">
                             <div className="form-control">
                                 <label className="label">

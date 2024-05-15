@@ -33,6 +33,8 @@ const Navbar = () => {
         <NavLink activeClassname='active' to='ManageMyFood' className='btn mr-2'>Manage My Food</NavLink>
         <NavLink activeClassname='active' to='/AvailableFoods' className='btn mr-2'>Available Foods</NavLink>
         <NavLink activeClassname='active' to='/MyFoodRequest' className='btn mr-2'>My Food Request</NavLink>
+        <Link to='/Login' className="btn mr-2 md:hidden">Login</Link>
+        <Link to='/Register' className="btn md:hidden">Register</Link>
     </>
     const handleSignOut = () => {
         Swal.fire({
@@ -43,13 +45,13 @@ const Navbar = () => {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, do it!'
         })
-        .then(result => {
-            if (result.isConfirmed) {
-                logOut()
-                .then()
-                .catch()
-            }
-        })
+            .then(result => {
+                if (result.isConfirmed) {
+                    logOut()
+                        .then()
+                        .catch()
+                }
+            })
     }
     return (
         <div>
@@ -88,8 +90,8 @@ const Navbar = () => {
                             </div>
                             :
                             <div>
-                                <Link to='/Login' className="btn mr-2">Login</Link>
-                                <Link to='/Register' className="btn">Register</Link>
+                                <Link to='/Login' className="btn mr-2 hidden md:inline-flex">Login</Link>
+                                <Link to='/Register' className="btn hidden md:inline-flex">Register</Link>
                             </div>
                     }
                 </div>
