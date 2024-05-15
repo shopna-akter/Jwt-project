@@ -7,7 +7,7 @@ const MyFoodRequest = () => {
     const { isPending, isError, error, data: myRequests } = useQuery({
         queryKey: ['requests'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/requests?email=${user.email}` , {credentials: 'include'});
+            const res = await fetch(`https://assignment-p11-server.vercel.app/requests?email=${user.email}` , {credentials: 'include'});
             return res.json()
         }
     })
@@ -27,7 +27,6 @@ const MyFoodRequest = () => {
                             <th>Pickup Location</th>
                             <th>Expire Date</th>
                             <th>Request Date</th>
-                            <th>Your Donation Amount</th>
                         </tr>
                     </thead>
 
@@ -45,7 +44,6 @@ const MyFoodRequest = () => {
                                     <td className="font-bold">{myRequest.Pickup_Location}</td>
                                     <td className="font-bold">{myRequest.Expired_Date}</td>
                                     <th>{myRequest.formattedTime}</th>
-                                    <th></th>
                                 </tr>
                             ))
                         }

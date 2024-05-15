@@ -26,7 +26,7 @@ const FoodDetails = () => {
 
         const requestedFood = { Donator_Email, Food_name, User_Name, Pickup_Location, User_Email, Image, Donator_Image, Additional_Notes, formattedTime, Expired_Date }
         console.log(requestedFood);
-        fetch('http://localhost:5000/requests', {
+        fetch('https://assignment-p11-server.vercel.app/requests', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -37,7 +37,7 @@ const FoodDetails = () => {
             .then(data => {
                 if (data) {
                     const updateData = { status: 'Pending' };
-                    fetch(`http://localhost:5000/foods/${food._id}`, {
+                    fetch(`https://assignment-p11-server.vercel.app/foods/${food._id}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'

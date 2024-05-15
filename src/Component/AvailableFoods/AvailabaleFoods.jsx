@@ -19,7 +19,7 @@ const AvailableFoods = () => {
     }
     const handleSearchValue = () => {
         if(searchValue){
-            fetch(`http://localhost:5000/foods/${searchValue}`)
+            fetch(`https://assignment-p11-server.vercel.app/foods/${searchValue}`)
             .then(res => res.json())
             .then(data => {
                 setFoods(data)
@@ -45,7 +45,7 @@ const AvailableFoods = () => {
         setSearchValue(e.target.value);
     };
     const handleSort = () => {
-        fetch('http://localhost:5000/sortedFoods')
+        fetch('https://assignment-p11-server.vercel.app/sortedFoods')
             .then(res => res.json())
             .then(data => setFoods(data))
     }

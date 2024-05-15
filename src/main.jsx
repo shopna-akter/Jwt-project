@@ -47,22 +47,22 @@ const router = createBrowserRouter([
       {
         path: '/ManageMyFood',
         element: <PrivateRoute><ManageMyFood></ManageMyFood></PrivateRoute>,
-        loader: () => fetch('http://localhost:5000/foods')
+        loader: () => fetch('https://assignment-p11-server.vercel.app/foods')
       },
       {
         path: '/AvailableFoods',
         element: <AvailabaleFoods></AvailabaleFoods>,
-        loader: () => fetch('http://localhost:5000/availableFoods')
+        loader: () => fetch('https://assignment-p11-server.vercel.app/availableFoods')
       },
       {
         path: '/updateFood/:id',
         element: <UpdateFood></UpdateFood>,
-        loader: ({params}) => fetch(`http://localhost:5000/foods/${params.id}`)
+        loader: ({params}) => fetch(`https://assignment-p11-server.vercel.app/foods/${params.id}`)
       },
       {
         path: '/Foods/:id',
         element: <PrivateRoute><FoodDetails></FoodDetails></PrivateRoute>,
-        loader: () => fetch('http://localhost:5000/foods')
+        loader: () => fetch('https://assignment-p11-server.vercel.app/foods')
       },
       {
         path: '/MyFoodRequest',

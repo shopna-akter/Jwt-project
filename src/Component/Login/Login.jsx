@@ -7,7 +7,8 @@ import app from "../../firebase/firebase.init";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
-
+import Lottie from "lottie-react";
+import groovyWalkAnimation from "../../../Animation - 1715749319003.json";
 const Login = () => {
     const navigate = useNavigate()
     const { SignIn } = useContext(AuthContext)
@@ -76,7 +77,11 @@ const Login = () => {
                     <title>| Register</title>
                 </Helmet>
                 <div className="hero-content flex-col lg:flex-row">
-                    <img src="https://i.ibb.co/5TmJhGm/Banner-31a.jpg" className="md:h-[400px] h-[450px] w-[450px] md:w-[600px]" alt="" />
+                    <Lottie
+                        animationData={groovyWalkAnimation}
+                        aria-aria-labelledby="use lottie animation"
+                    />
+                    {/* <img src="https://i.ibb.co/5TmJhGm/Banner-31a.jpg" className="md:h-[400px] h-[450px] w-[450px] md:w-[600px]" alt="" /> */}
                     <div className="card shrink-0 text-center w-full max-w-sm shadow-2xl bg-base-100">
                         <h2 className="text-4xl font-bold mt-2">Login now to Tourspot!!</h2>
                         <form onSubmit={handleLogin} className="card-body">

@@ -1,6 +1,18 @@
+// import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-
+// import lottie from "lottie-web";
 const AboutUs = () => {
+    // const container = useRef(null);
+    // useEffect(() => {
+    //     lottie.loadAnimation({
+    //         container: container.current,
+    //         renderer: 'svg',
+    //         loop: true,
+    //         autoplay: true,
+    //         animationData: require('../../../Animation - 1715749319003.json')
+    //     });
+    //     return () => container.current && lottie.stop();
+    // }, []);
     return (
         <div>
             <section id="about" className="bg-gray-100 py-12">
@@ -20,6 +32,7 @@ const AboutUs = () => {
                         </div>
                         <div className="w-full md:w-1/2 lg:pl-8">
                             <div className="relative overflow-hidden rounded-lg shadow-lg">
+                                {/* <div className="container" ref={container}></div> */}
                                 <img src="https://i.ibb.co/gvYMj1F/upic-team-cta.jpg" alt="About Us" className="object-cover w-full h-full" />
                                 <div className="absolute inset-0 bg-black opacity-50"></div>
                                 <div className="absolute inset-0 flex items-center justify-center">

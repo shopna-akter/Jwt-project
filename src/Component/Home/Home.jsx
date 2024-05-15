@@ -7,7 +7,9 @@ const Home = () => {
     // console.log(foods);
     return (
         <div>
-            <Slider></Slider>
+            <div className="z-10">
+                <Slider></Slider>
+            </div>
             <FeaturedFood></FeaturedFood>
             <AboutUs></AboutUs>
             <RecentDonations></RecentDonations>
