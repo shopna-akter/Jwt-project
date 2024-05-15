@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 const FeaturedFood = () => {
   const { isPending, isError, error, data: foods } = useQuery({
     queryKey: ['bestFoods'],
@@ -22,7 +23,7 @@ const FeaturedFood = () => {
       </div>
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3 mx-4">
         {foods?.map((food) => (
-          <div key={food._id} className="mb-4">
+          <motion.div key={food._id} whileHover={{ scale: 1.05 }} className="mb-4">
             <div className="card border bg-base-100 shadow-xl">
               <figure>
                 <img src={food.Image} className='h-60' alt={food.Food_name} />
@@ -65,7 +66,7 @@ const FeaturedFood = () => {
                 <Link className="btn btn-info" to={`Foods/${food._id}`}>View Details</Link>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
