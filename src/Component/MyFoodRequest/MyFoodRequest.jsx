@@ -3,11 +3,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const MyFoodRequest = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const { isPending, isError, error, data: myRequests } = useQuery({
         queryKey: ['requests'],
         queryFn: async () => {
-            const res = await fetch(`https://assignment-p11-server.vercel.app/requests?email=${user.email}` , {credentials: 'include'});
+            const res = await fetch(`https://assignment-p11-server.vercel.app/requests?email=${user.email}`, { credentials: 'include' });
             return res.json()
         }
     })
@@ -23,6 +23,9 @@ const MyFoodRequest = () => {
                 <table className="table">
                     <thead>
                         <tr>
+                            <th><label>
+                                <input type="checkbox" className="checkbox" />
+                            </label></th>
                             <th>Name</th>
                             <th>Pickup Location</th>
                             <th>Expire Date</th>
@@ -34,6 +37,9 @@ const MyFoodRequest = () => {
                         {
                             myRequests.map(myRequest => (
                                 <tr key={myRequest._id}>
+                                    <td><label>
+                                        <input type="checkbox" className="checkbox" />
+                                    </label></td>
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div>

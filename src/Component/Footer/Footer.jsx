@@ -3,7 +3,7 @@ import { FaFacebook, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
 const Footer = () => {
     return (
         <div>
-            <footer className="footer md:justify-evenly flex md:p-10 bg-neutral text-neutral-content">
+            <footer className="footer justify-evenly flex md:p-10 bg-neutral text-neutral-content">
                 <div className="text-center">
                     <h2 className="text-xl font-bold">Be a Hand</h2>
                     <div className="flex gap-4">

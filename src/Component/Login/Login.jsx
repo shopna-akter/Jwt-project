@@ -74,7 +74,7 @@ const Login = () => {
             <div className="hero min-h-screen ">
                 <ToastContainer></ToastContainer>
                 <Helmet>
-                    <title>Be a Helping Hand | Login</title>
+                    <title>|| Login</title>
                 </Helmet>
                 <div className="hero-content flex-col lg:flex-row">
                     <Lottie

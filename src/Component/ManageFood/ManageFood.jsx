@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 
 const ManageMyFood = () => {
     const { user } = useContext(AuthContext);
@@ -46,7 +47,10 @@ const ManageMyFood = () => {
 
     return (
         <div>
-            <table className="md:min-w-full divide-y divide-gray-200">
+            <Helmet>
+                <title>|| Manage My Food</title>
+            </Helmet>
+            <table className="md:min-w-full divide-y table divide-gray-200">
                 <thead className="bg-gray-50">
                     <tr>
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -67,13 +71,13 @@ const ManageMyFood = () => {
                     {foods.filter(food => food.User_Email === user.email).map((food, index) => (
                         <tr key={food._id} className={index % 2 === 0 ? "bg-gray-300" : "bg-white"}>
                             <td className="px-6 py-4 whitespace-nowrap">
-                                <h2 className="text-lg font-semibold">{food.Food_name}</h2>
+                                <h2 className="md:text-lg font-semibold">{food.Food_name}</h2>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                                <h2 className="text-lg font-semibold">{food.Pickup_Location}</h2>
+                                <h2 className="md:text-lg font-semibold">{food.Pickup_Location}</h2>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                                <h2 className="text-lg font-semibold">{food.Quantity}</h2>
+                                <h2 className="md:text-lg font-semibold">{food.Quantity}</h2>
                             </td>
                             <td className="px-6 gap-4 py-4 flex whitespace-nowrap text-sm text-gray-500">
                                 <Link to={`/updatefood/${food._id}`} className="text-indigo-600 hover:text-indigo-900">
