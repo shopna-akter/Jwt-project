@@ -57,7 +57,7 @@ const router = createBrowserRouter([
       {
         path: '/updateFood/:id',
         element: <UpdateFood></UpdateFood>,
-        loader: ({params}) => fetch(`https://assignment-p11-server.vercel.app/foods/${params.id}`)
+        loader: ({params}) => fetch(`https://assignment-p11-server.vercel.app/food/${params.id}`)
       },
       {
         path: '/Foods/:id',

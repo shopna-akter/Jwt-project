@@ -36,7 +36,7 @@ const FoodDetails = () => {
             .then(res => res.json())
             .then(data => {
                 if (data) {
-                    const updateData = { status: 'Pending' };
+                    const updateData = { Food_Status: 'Pending' };
                     fetch(`https://assignment-p11-server.vercel.app/foods/${food._id}`, {
                         method: 'PUT',
                         headers: {
