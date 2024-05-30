@@ -4,8 +4,8 @@ import Swal from "sweetalert2";
 const UpdateFood = () => {
     const food = useLoaderData()
     
-    const {Food_name,Pickup_Location, Food_Status, Additional_Notes, Quantity, Expired_Date , _id } = food
-    console.log(Food_name);
+    const {Food_name,Pickup_Location, Image, Additional_Notes, Quantity, Expired_Date , _id } = food
+    console.log(food);
     const handleUpdateFood = e => {
         e.preventDefault()
         const form = e.target
@@ -66,7 +66,7 @@ const UpdateFood = () => {
 
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Food Image</label>
-                            <input defaultValue={Food_Status} required type="text" placeholder="Enter Food Image" name="Food_Image" className="input input-bordered w-full" />
+                            <input defaultValue={Image} required type="text" placeholder="Enter Food Image" name="Food_Image" className="input input-bordered w-full" />
                         </div>
                         <br />
                         <div>

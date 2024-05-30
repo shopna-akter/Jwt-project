@@ -18,22 +18,22 @@ const AvailableFoods = () => {
         setSearchValue(searchField)
     }
     const handleSearchValue = () => {
-        if(searchValue){
+        if (searchValue) {
             fetch(`https://assignment-p11-server.vercel.app/foods/${searchValue}`)
-            .then(res => res.json())
-            .then(data => {
-                setFoods(data)
-            })
-            .catch(error => {
-                Swal.fire({
-                    title: "Mistake!",
-                    text: "You may type the name incorrect please type exect to get the data",
-                    icon: "error"
+                .then(res => res.json())
+                .then(data => {
+                    setFoods(data)
                 })
-                console.error(error);
-            })
+                .catch(error => {
+                    Swal.fire({
+                        title: "Mistake!",
+                        text: "You may type the name incorrect please type exect to get the data",
+                        icon: "error"
+                    })
+                    console.error(error);
+                })
         }
-        else{
+        else {
             Swal.fire({
                 title: "Mistake!",
                 text: "Search field is empty",
@@ -57,8 +57,10 @@ const AvailableFoods = () => {
                     <p>Explore our selection of delicious and fresh foods available for you to enjoy!</p>
                 </div>
                 <div className="md:flex gap-8 my-6 justify-center">
-                    <button onClick={handleChangeLayout} className="btn bg-green-400">Change Layout</button>
-                    <div className="join">
+                    <div className="ml-[150px] md:ml-0">
+                        <button onClick={handleChangeLayout} className="btn bg-green-400">Change Layout</button>
+                    </div>
+                    <div className="join ml-[100px] mt-2 md:ml-0">
                         <form onSubmit={handleSearch}>
                             <input name="searchField" onChange={handleInputChange} className="input input-bordered join-item" placeholder="Search" />
                         </form>
@@ -66,7 +68,7 @@ const AvailableFoods = () => {
                             <button onClick={handleSearchValue} className="btn join-item">Search</button>
                         </div>
                     </div>
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 ml-[130px] mt-2 md:ml-0">
                         <h2 className="mt-3 font-medium ">Filter By Expire Date</h2>
                         <button onClick={handleSort} className="btn"> High To Low</button>
                     </div>

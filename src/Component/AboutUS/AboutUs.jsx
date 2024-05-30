@@ -1,18 +1,38 @@
-// import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-// import lottie from "lottie-web";
+import { useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import { Link } from 'react-router-dom';
+
 const AboutUs = () => {
-    // const container = useRef(null);
-    // useEffect(() => {
-    //     lottie.loadAnimation({
-    //         container: container.current,
-    //         renderer: 'svg',
-    //         loop: true,
-    //         autoplay: true,
-    //         animationData: require('../../../Animation - 1715749319003.json')
-    //     });
-    //     return () => container.current && lottie.stop();
-    // }, []);
+    const [selectedLocation, setSelectedLocation] = useState(null);
+
+    const mirpurCoordinates = {
+        lat: 23.8103,
+        lng: 90.4125
+    };
+
+    const impactLocations = [
+        {
+            name: "Location 1",
+            position: [37.7749, -122.4194],
+            story: "Impact story for Location 1.",
+            image: "https://via.placeholder.com/150",
+        },
+        {
+            name: "Location 2",
+            position: [34.0522, -118.2437],
+            story: "Impact story for Location 2.",
+            image: "https://via.placeholder.com/150",
+        },
+        // Add more locations as needed
+    ];
+
+    const customIcon = new L.Icon({
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+    });
     return (
         <div>
             <section id="about" className="bg-gray-100 py-12">
@@ -20,6 +40,59 @@ const AboutUs = () => {
                     <div className="flex flex-wrap items-center justify-between">
                         <div className="w-full md:w-1/2 lg:pr-8">
                             <h2 className="text-4xl font-bold text-gray-800 mb-6">About Us</h2>
+                            <div className="w-[200%] h-[500px]">
+                                <MapContainer center={[mirpurCoordinates.lat, mirpurCoordinates.lng]} zoom={12} className="h-full">
+                                    <TileLayer
+                                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                    />
+
+                                    <Marker
+                                        position={[mirpurCoordinates.lat, mirpurCoordinates.lng]}
+                                        icon={customIcon}
+                                        eventHandlers={{
+                                            click: () => {
+                                                setSelectedLocation({
+                                                    name: "Mirpur, Dhaka",
+                                                    position: [mirpurCoordinates.lat, mirpurCoordinates.lng],
+                                                    story: "Impact story for Mirpur, Dhaka.",
+                                                    image: "https://via.placeholder.com/150",
+                                                });
+                                            },
+                                        }}
+                                    />
+
+                                    {impactLocations.map((location, index) => (
+                                        <Marker
+                                            key={index}
+                                            position={location.position}
+                                            icon={customIcon}
+                                            eventHandlers={{
+                                                click: () => {
+                                                    setSelectedLocation(location);
+                                                },
+                                            }}
+                                        />
+                                    ))}
+
+                                    {selectedLocation && (
+                                        <Popup
+                                            position={selectedLocation.position}
+                                            onClose={() => setSelectedLocation(null)}
+                                        >
+                                            <div>
+                                                <h2 className="font-bold">{selectedLocation.name}</h2>
+                                                <img
+                                                    src={selectedLocation.image}
+                                                    alt={selectedLocation.name}
+                                                    className="w-32 h-24 object-cover my-2"
+                                                />
+                                                <p>{selectedLocation.story}</p>
+                                            </div>
+                                        </Popup>
+                                    )}
+                                </MapContainer>
+                            </div>
                             <p className="text-lg text-gray-700 leading-relaxed mb-6">
                                 Welcome to Your Website Name, a platform dedicated to reducing food waste and fostering community engagement through food sharing. Our mission is to connect individuals, businesses, and organizations with surplus food to those who need it most, creating a more sustainable and equitable food system.
                             </p>
@@ -30,7 +103,7 @@ const AboutUs = () => {
                                 Together, we can make a difference in the lives of those facing food insecurity while also reducing the environmental impact of food waste. Join us in our mission to build a healthier, more resilient community for all.
                             </p>
                         </div>
-                        <div className="w-full md:w-1/2 lg:pl-8">
+                        <div className="w-full lg:mt-[430px] md:w-1/2 lg:pl-8">
                             <div className="relative overflow-hidden rounded-lg shadow-lg">
                                 {/* <div className="container" ref={container}></div> */}
                                 <img src="https://i.ibb.co/gvYMj1F/upic-team-cta.jpg" alt="About Us" className="object-cover w-full h-full" />
